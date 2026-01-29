@@ -1,4 +1,5 @@
 import NavItem from './NavItem'
+import '../../../../styles/Dashboard.css'
 
 function NavMenu() {
     const items = [
@@ -11,7 +12,7 @@ function NavMenu() {
     ];
 
     return (
-        <nav>
+        <nav className='nav-menu'>
         {items.map((item) => (
             <NavItem key={item.label} {...item} />
         ))}

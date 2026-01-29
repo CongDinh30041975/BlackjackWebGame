@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
 import TopNav from "./TopNav/TopNav";
+import '../../styles/Dashboard.css'
 
 function DashBoard() {
     return (
-    <div className="dashboard">
+    <>
         <TopNav />
         <main className="main">
             <Outlet />
         </main>
-    </div>
+    </>
     );
 }
 
