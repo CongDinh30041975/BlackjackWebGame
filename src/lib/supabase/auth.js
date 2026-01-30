@@ -1,14 +1,19 @@
 import { supabase } from "./supabase";
 
-export const register = (email, password) => {
-    supabase.auth.signUp({ email, password });
+export const register = async (email, password) => {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw error;
+    return data;
 }
 
-export const login = (email, password) => {
-    supabase.auth.signInWithPassword({ email, password });
+export const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    return data;
 }
 
-export const logout = () => {
-    supabase.auth.signOut();
+
+export const logout = async () => {
+    await supabase.auth.signOut();
 }
   

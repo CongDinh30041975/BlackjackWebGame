@@ -1,0 +1,103 @@
+/* ============== Input Box Container ============== */
+.input-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* ============== Input Field Styling ============== */
+.input-box input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafbfc;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.input-box input::placeholder {
+    color: #999;
+}
+
+.input-box input:focus {
+    outline: none;
+    border-color: #4285f4;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.input-box input:hover:not(:focus) {
+    border-color: #d0d0d0;
+}
+
+/* ============== Icon Styling ============== */
+.icon {
+    position: absolute;
+    left: 12px;
+    color: #666;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.input-box input:focus ~ .icon {
+    color: #4285f4;
+}
+
+/* ============== Password Toggle Button ============== */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 4px;
+    background: none;
+    border: none;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    color: #4285f4;
+    transform: scale(1.1);
+}
+
+/* ============== Password Masking ============== */
+/* Hide native reveal/clear controls on some browsers */
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+/* Hide WebKit/Blink decoration */
+input::-webkit-textfield-decoration-container,
+input::-webkit-textfield-decoration-button {
+    display: none !important;
+}
+
+/* CSS masking for password visibility toggle */
+.password-hidden {
+    -webkit-text-security: disc;
+    -moz-text-security: disc;
+}
+
+.password-visible {
+    -webkit-text-security: none;
+}
+
+
+

@@ -1,0 +1,89 @@
+/* ============== Register Container ============== */
+.register-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 1) 100%);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+/* ============== Form Title ============== */
+.register-container > p {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+/* ============== Submit Button ============== */
+.register-container .summit {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #4285f4 0%, #3a7bc8 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.register-container .summit:hover {
+    background: linear-gradient(135deg, #3a7bc8 0%, #2e62a0 100%);
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+    transform: translateY(-2px);
+}
+
+.register-container .summit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+}
+
+.register-container .summit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* ============== Responsive Design ============== */
+@media (max-width: 480px) {
+    .register-container {
+        max-width: 100%;
+        padding: 30px 20px;
+        gap: 14px;
+    }
+
+    .register-container > p {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .register-container .summit {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .register-container {
+        padding: 24px 16px;
+    }
+
+    .register-container > p {
+        font-size: 20px;
+    }
+}
