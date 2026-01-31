@@ -5,30 +5,45 @@ import { Navigate } from "react-router-dom";
 import useAuthStore from './stores/authStore';
 
 // Pages
+import IntroducePage from './pages/IntroducePage'
 import DashboardPage from './pages/DashboardPage';
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from "./pages/ProfilePage";
+
+// Route chỉ cho phép truy cập khi chưa đăng nhập
+function PublicOnlyRoute({ children }) {
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  if (isLoggedIn) return <Navigate to="/" replace />;
+  return children;
+}
+
+// Route chỉ cho phép truy cập khi đã đăng nhập
+function PrivateOnlyRoute({ children }) {
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  if (!isLoggedIn) return <Navigate to="/" replace />;
+  return children;
+}
 
 function App() {
-  const restoreSession = useAuthStore((s) => s.restoreSession);
-  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const restoreSession = useAuthStore((s) => s.restoreSession);  
 
   useEffect(() => {
     // Khôi phục session từ Supabase khi app khởi động
     restoreSession();
   }, [restoreSession]);
 
-  // Route chỉ cho phép truy cập khi chưa đăng nhập
-  function PublicOnlyRoute({ children }) {
-    const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
-    if (isLoggedIn) return <Navigate to="/" replace />;
-    return children;
-  }
-
-
   return (
     <Routes>
-      <Route path='/' element={<DashboardPage />} >
+      <Route element={<DashboardPage />} >
+        <Route
+          path="/"
+          element={
+            <IntroducePage />
+          }
+        />
+
+
         <Route
           path="/login"
           element={
@@ -44,6 +59,15 @@ function App() {
             <PublicOnlyRoute>
               <RegisterPage />
             </PublicOnlyRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <PrivateOnlyRoute>
+              <ProfilePage />
+            </PrivateOnlyRoute>
           }
         />
       </Route>

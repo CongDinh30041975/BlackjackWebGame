@@ -86,14 +86,25 @@ const useAuthStore = create(
             logout: async () => {
                 set({ loading: true });
 
-                await authService.logout?.();
+                try {
+                    const result = await authService.logout?.();
 
-                set({
-                    session: null,
-                    user: null,
-                    isLoggedIn: false,
-                    loading: false,
-                });
+                    set({
+                        session: null,
+                        user: null,
+                        isLoggedIn: false,
+                        loading: false,
+                        error: null,
+                    });
+
+                    return true;
+                } catch (err) {
+                    set({
+                        error: err.message,
+                        loading: false,
+                    });
+                    return false;
+                }               
             },
         }),
         {

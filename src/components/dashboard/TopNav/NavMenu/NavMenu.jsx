@@ -1,16 +1,27 @@
 import NavItem from './NavItem'
+import useAuthStore from '../../../../stores/authStore';
 import '../../../../styles/Dashboard.css'
 
-function NavMenu() {
-    const items = [
-        { icon: "", label: "Chơi trong phòng chung" },
-        { icon: "", label: "Chơi trong phòng riêng" },
+function NavMenu() {   
+    const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+    
+    const baseItems = [
+        { icon: "", label: "Chơi" },
         { icon: "", label: "Hướng dẫn chơi" },
         { icon: "", label: "Bảng xếp hạng" },
-        { icon: "", label: "Bạn bè" },
-        { to: "/register", icon: "", label: "Đăng ký" },
-        { to: "/login", icon: "", label: "Đăng nhập" },
     ];
+
+    const items = isLoggedIn 
+        ? [
+            ...baseItems,
+            { icon: "", label: "Bạn bè" },
+            { to: "/profile", icon: "", label: "Trang cá nhân" },
+          ]
+        : [
+            ...baseItems,
+            { to: "/register", icon: "", label: "Đăng ký" },
+            { to: "/login", icon: "", label: "Đăng nhập" },
+          ];
 
     return (
         <nav className='nav-menu'>
