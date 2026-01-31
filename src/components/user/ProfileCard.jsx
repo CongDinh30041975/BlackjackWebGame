@@ -1,14 +1,18 @@
 import useAuthStore from "../../stores/authStore";
+import useUserStore from "../../stores/userStore";
 
 function ProfileCard() {
     const logout = useAuthStore((s) => s.logout);    
     const loading = useAuthStore((s) => s.loading);
     const error = useAuthStore((s) => s.error);
 
+    const clearProfile = useUserStore((s) => s.clearProfile);
+
     const handleLogout = async (e) => {
         e.preventDefault();
 
         const success = await logout();
+        await clearProfile();
 
         if (success) {
             alert('Đăng xuất thành công!');

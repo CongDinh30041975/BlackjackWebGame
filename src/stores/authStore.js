@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import * as authService from "../lib/supabase/auth";
+import useUserStore from './userStore';
 
 const useAuthStore = create(
     persist(
@@ -19,10 +20,16 @@ const useAuthStore = create(
                     if (data?.session) {
                         set({
                             session: data.session,
-                            user: data.user,
+                            user: data.session?.user ?? data.user,
                             isLoggedIn: true,
                             loading: false,
                         });
+
+                        // Fetch the user's profile into the user store
+                        const userId = data.session?.user?.id ?? data.user?.id;
+                        if (userId) {
+                            await useUserStore.getState().fetchProfile(userId);
+                        }
                     } else {
                         set({
                             session: null,
@@ -73,6 +80,12 @@ const useAuthStore = create(
                         loading: false,
                     });
 
+                    // Fetch user profile into user store
+                    const userId = data.session?.user?.id ?? data.user?.id;
+                    if (userId) {
+                        await useUserStore.getState().fetchProfile(userId);
+                    }
+
                     return true;
                 } catch (err) {
                     set({
@@ -96,6 +109,9 @@ const useAuthStore = create(
                         loading: false,
                         error: null,
                     });
+
+                    // Clear profile on logout
+                    useUserStore.getState().clearProfile();
 
                     return true;
                 } catch (err) {
