@@ -3,34 +3,30 @@ import { NavLink } from 'react-router-dom';
 import { register } from "../../lib/supabase/auth";
 import EmailInput from "../common/EmailInput";
 import PasswordInput from "../common/PasswordInput";
-import '../../styles/RegisterForm.css'
+import '../../styles/AuthForm.css'
 
 function RegisterForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+    
+    const login = useAuthStore((s) => s.login);
+    const loading = useAuthStore((s) => s.loading);
+    const error = useAuthStore((s) => s.error);
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        try {
-            await register(email, password);
+        const success = await login(email, password);
+        
+        if (success) {
             alert('Đăng ký thành công!');
-            setEmail('');
-            setPassword('');
-        }
-        catch(error) {
-            alert(`Lỗi: ${error.message}`)
-        }
-        finally {
-            setLoading(false);
         }
     };
 
 
     return (
-        <form className="register-container" onSubmit={handleRegister}>
+        <form onSubmit={handleRegister}>
             <h2>Đăng ký</h2>
             <EmailInput value={email} onChange={(e) => setEmail(e.target.value)} />
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />

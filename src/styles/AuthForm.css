@@ -1,5 +1,5 @@
 /* ============== Register Container ============== */
-.register-container {
+form {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -14,7 +14,7 @@
 }
 
 /* ============== Form Title ============== */
-.register-container > h2 {
+form > h2 {
     font-size: 28px;
     font-weight: 700;
     color: #1a1a1a;
@@ -24,17 +24,15 @@
 }
 
 /* ============== Form Title ============== */
-.register-container > p {
+form > p {
     font-size: 16px;
     font-weight: 70;
     color: #1a1a1a;
-    margin: 0 0 20px 0;
-    text-align: left;
     letter-spacing: -0.5px;
 }
 
 /* ============== Submit Button ============== */
-.register-container .summit {
+form .summit {
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 600;
@@ -51,18 +49,18 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.register-container .summit:hover {
+form .summit:hover {
     background: linear-gradient(135deg, #3a7bc8 0%, #2e62a0 100%);
     box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
     transform: translateY(-2px);
 }
 
-.register-container .summit:active {
+form .summit:active {
     transform: translateY(0);
     box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
 }
 
-.register-container .summit:disabled {
+form .summit:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     box-shadow: none;
@@ -71,29 +69,36 @@
 
 /* ============== Responsive Design ============== */
 @media (max-width: 480px) {
-    .register-container {
+    form {
         max-width: 100%;
         padding: 30px 20px;
         gap: 14px;
     }
 
-    .register-container > p {
+    form > p {
         font-size: 24px;
         margin-bottom: 16px;
     }
 
-    .register-container .summit {
+    form .summit {
         padding: 12px 20px;
         font-size: 15px;
     }
 }
 
 @media (max-width: 360px) {
-    .register-container {
+    form {
         padding: 24px 16px;
     }
 
-    .register-container > p {
+    form > p {
         font-size: 20px;
     }
+}
+
+.auth-links {
+    display: flex;
+    justify-content: space-between; /* Đẩy 2 cái về 2 đầu */
+    align-items: center;           /* Căn giữa theo chiều dọc */
+    gap: 10px;                     /* Khoảng cách giữa 2 phần tử */
 }
