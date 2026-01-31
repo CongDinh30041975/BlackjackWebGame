@@ -8,7 +8,8 @@ function NavMenu() {
         { icon: "", label: "Hướng dẫn chơi" },
         { icon: "", label: "Bảng xếp hạng" },
         { icon: "", label: "Bạn bè" },
-        { to: "/RegisterPage", icon: "", label: "Đăng ký" },
+        { to: "/register", icon: "", label: "Đăng ký" },
+        { to: "/login", icon: "", label: "Đăng nhập" },
     ];
 
     return (

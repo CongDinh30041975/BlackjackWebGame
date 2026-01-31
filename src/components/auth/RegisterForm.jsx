@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { register } from "../../lib/supabase/auth";
 import EmailInput from "../common/EmailInput";
 import PasswordInput from "../common/PasswordInput";
@@ -16,6 +17,8 @@ function RegisterForm() {
         try {
             await register(email, password);
             alert('Đăng ký thành công!');
+            setEmail('');
+            setPassword('');
         }
         catch(error) {
             alert(`Lỗi: ${error.message}`)
@@ -28,13 +31,16 @@ function RegisterForm() {
 
     return (
         <form className="register-container" onSubmit={handleRegister}>
-            <p>Đăng ký</p>
+            <h2>Đăng ký</h2>
             <EmailInput value={email} onChange={(e) => setEmail(e.target.value)} />
             <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
             
             <button className="summit" disabled={loading}>
                 {loading ? 'Đang xử lý...' : 'Đăng ký'}
             </button>
+
+            <p>Đã có tài khoản? <NavLink to={'/login'}> Đăng nhập </NavLink></p>
+            
         </form>
     );
 };

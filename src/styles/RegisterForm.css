@@ -14,12 +14,22 @@
 }
 
 /* ============== Form Title ============== */
-.register-container > p {
+.register-container > h2 {
     font-size: 28px;
     font-weight: 700;
     color: #1a1a1a;
     margin: 0 0 20px 0;
     text-align: center;
+    letter-spacing: -0.5px;
+}
+
+/* ============== Form Title ============== */
+.register-container > p {
+    font-size: 16px;
+    font-weight: 70;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    text-align: left;
     letter-spacing: -0.5px;
 }
 

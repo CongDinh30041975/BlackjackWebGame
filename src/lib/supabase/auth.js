@@ -14,6 +14,6 @@ export const login = async (email, password) => {
 
 
 export const logout = async () => {
-    await supabase.auth.signOut();
+    return await supabase.auth.signOut();
 }
   
