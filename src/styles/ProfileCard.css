@@ -1,0 +1,135 @@
+.profile-card {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    align-items: flex-start;
+}
+
+.left-col {
+    width: 260px;
+    position: relative;
+    margin-right: 60px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    border-radius: 12px;
+    background-color: #3a0303;
+    display: block;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-btn {
+    position: absolute;
+    left: 0;
+    bottom: -48px;
+    background: #ff4d4f;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.right-col {
+    flex: 1;
+    max-width: 600px;
+}
+
+.right-col h2 {
+    margin-top: 0;
+}
+
+.field-label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.field-input {
+    width: 235px;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.field-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.field-value {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+}
+
+.save-btn {
+    background: #1890ff;
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: transparent;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .profile-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .left-col {
+        width: 100%;
+    }
+
+    .logout-btn {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin-top: 12px;
+    }
+}
