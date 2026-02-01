@@ -10,24 +10,31 @@ export async function getProfileById(userId) {
 
 export async function uploadAvatar(userId, file) {
   try {
-
-    const { data: sessionData } = await supabase.auth.getSession()
-    console.log('session:', sessionData.session)
-
     // Validate file
     if (!file || !file.type.startsWith('image/')) {
       throw new Error('File phải là hình ảnh')
     }
 
+    const allowedTypes = [
+      'image/jpeg', 'image/jpg', 'image/png', 
+      'image/webp', 'image/gif'
+    ];
+    
+    if (!allowedTypes.includes(file.type.toLowerCase())) {
+      throw new Error(`Chỉ chấp nhận ảnh: JPEG, PNG, WebP, GIF`);
+    }
+
     // Tải file lên storage/avatars
-    const timestamp = Date.now()
-    const fileName = `${userId}.jpg`;
+    const timestamp = Date.now();
+    const safeFileName = timestamp + '.webp';
+    const filePath = `${userId}/${safeFileName}`;
     
     const { error: uploadError, data } = await supabase.storage
       .from('avatars')
-      .upload(fileName, file, { 
+      .upload(filePath, file, { 
         upsert: true,
         contentType: file.type,
+        cacheControl: '3600'
       })      
     
     if (uploadError) throw uploadError
@@ -35,7 +42,7 @@ export async function uploadAvatar(userId, file) {
     // Lấy public URL của ảnh
     const { data: urlData } = supabase.storage
       .from('avatars')
-      .getPublicUrl(fileName)
+      .getPublicUrl(filePath)
     
     const avatarUrl = urlData.publicUrl
 
