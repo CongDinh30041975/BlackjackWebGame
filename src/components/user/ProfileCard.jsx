@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import useAuthStore from "../../stores/authStore";
 import useUserStore from "../../stores/userStore";
 import { CiEdit } from "react-icons/ci";
-import "../../styles/ProfileCard.css";
+import "../../styles/ProfileCard.css"; 
 
 function ProfileCard({ onLogout, onSave, onCancel }) {
     const logout = useAuthStore((s) => s.logout);
@@ -107,7 +107,7 @@ function ProfileCard({ onLogout, onSave, onCancel }) {
                 <div className="avatar-wrapper">
                     <img
                         className="avatar-img"
-                        src={avatarPreview || "src\assets\Avatar_placeholder.webp"}
+                        src={avatarPreview || '../../assets/Avatar_placeholder.webp'}
                         alt="Ảnh đại diện"
                     />
                     <button

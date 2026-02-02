@@ -36,7 +36,7 @@ function RegisterForm() {
                 {loading ? 'Đang xử lý...' : 'Đăng ký'}
             </button>
 
-            <p>Đã có tài khoản? <NavLink to={'/login'}> Đăng nhập </NavLink></p>
+            <p>Đã có tài khoản? <NavLink to={'/auth/login'}> Đăng nhập </NavLink></p>
             
         </form>
     );

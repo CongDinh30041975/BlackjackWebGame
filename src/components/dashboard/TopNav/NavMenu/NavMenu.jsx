@@ -15,12 +15,12 @@ function NavMenu() {
         ? [
             ...baseItems,
             { icon: "", label: "Bạn bè" },
-            { to: "/profile", icon: "", label: "Trang cá nhân" },
+            { to: "/user/profile", icon: "", label: "Trang cá nhân" },
           ]
         : [
             ...baseItems,
-            { to: "/register", icon: "", label: "Đăng ký" },
-            { to: "/login", icon: "", label: "Đăng nhập" },
+            { to: "/auth/register", icon: "", label: "Đăng ký" },
+            { to: "/auth/login", icon: "", label: "Đăng nhập" },
           ];
 
     return (

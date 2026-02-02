@@ -46,7 +46,7 @@ function App() {
 
 
         <Route
-          path="/login"
+          path="/auth/login"
           element={
             <PublicOnlyRoute>
               <LoginPage />
@@ -55,7 +55,7 @@ function App() {
         />
 
         <Route
-          path="/register"
+          path="/auth/register"
           element={
             <PublicOnlyRoute>
               <RegisterPage />
@@ -64,7 +64,7 @@ function App() {
         />
 
           <Route
-            path="/resetPassword"
+            path="/auth/resetPassword"
             element={
               <PublicOnlyRoute>
                 <ResetPasswordPage />
@@ -73,7 +73,7 @@ function App() {
           />
 
         <Route
-          path="/profile"
+          path="/user/profile"
           element={
             <PrivateOnlyRoute>
               <ProfilePage />

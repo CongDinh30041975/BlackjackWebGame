@@ -45,8 +45,8 @@ function LoginForm() {
             </button>
 
             <div className="auth-links">
-                <span>Chưa có tài khoản? <NavLink to="/register">Đăng ký</NavLink></span>
-                <NavLink to="/resetPassword">Quên mật khẩu</NavLink>
+                <span>Chưa có tài khoản? <NavLink to="/auth/register">Đăng ký</NavLink></span>
+                <NavLink to="/auth/resetPassword">Quên mật khẩu</NavLink>
             </div>
         </form>
     );
