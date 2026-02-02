@@ -12,22 +12,23 @@ import LoginPage from './pages/LoginPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import ProfilePage from "./pages/ProfilePage";
 
-// Route chỉ cho phép truy cập khi chưa đăng nhập
-function PublicOnlyRoute({ children }) {
-  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
-  if (isLoggedIn) return <Navigate to="/" replace />;
+// Bảo vệ đường dẫn
+function ProtectedRoute({
+  allow,          // boolean: điều kiện cho phép
+  redirectTo, // đường dẫn khi không thỏa điều kiện
+  children,
+}) {
+  if (!allow) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
   return children;
 }
 
-// Route chỉ cho phép truy cập khi đã đăng nhập
-function PrivateOnlyRoute({ children }) {
-  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
-  if (!isLoggedIn) return <Navigate to="/" replace />;
-  return children;
-}
 
 function App() {
   const restoreSession = useAuthStore((s) => s.restoreSession);  
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   useEffect(() => {
     // Khôi phục session từ Supabase khi app khởi động
@@ -48,36 +49,36 @@ function App() {
         <Route
           path="/auth/login"
           element={
-            <PublicOnlyRoute>
+            <ProtectedRoute allow={!isLoggedIn} redirectTo="/">
               <LoginPage />
-            </PublicOnlyRoute>
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/auth/register"
           element={
-            <PublicOnlyRoute>
+            <ProtectedRoute allow={!isLoggedIn} redirectTo="/">
               <RegisterPage />
-            </PublicOnlyRoute>
+            </ProtectedRoute>
           }
         />
 
           <Route
             path="/auth/resetPassword"
             element={
-              <PublicOnlyRoute>
+              <ProtectedRoute allow={!isLoggedIn} redirectTo="/">
                 <ResetPasswordPage />
-              </PublicOnlyRoute>
+              </ProtectedRoute>
             }
           />
 
         <Route
           path="/user/profile"
           element={
-            <PrivateOnlyRoute>
-              <ProfilePage />
-            </PrivateOnlyRoute>
+            <ProtectedRoute allow={isLoggedIn} redirectTo="/">
+              <ProfilePage />,
+            </ProtectedRoute>
           }
         />
       </Route>
