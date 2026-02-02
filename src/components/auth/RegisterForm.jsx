@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { register } from "../../lib/supabase/auth";
 import EmailInput from "../common/EmailInput";
 import PasswordInput from "../common/PasswordInput";
+import useAuthStore from '../../stores/authStore';
 import '../../styles/AuthForm.css'
 
 function RegisterForm() {

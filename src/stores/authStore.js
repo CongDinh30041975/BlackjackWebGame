@@ -122,6 +122,28 @@ const useAuthStore = create(
                     return false;
                 }               
             },
+
+            sendResetEmail: async (email) => {
+                set({ loading: true, error: null })
+                try {
+                    await authService.sendResetPasswordEmail(email)
+                    set({ loading: false })
+                    return true
+                } catch (err) {
+                    set({ error: err.message, loading: false })
+                    return false
+                }
+            },
+
+            checkRecoverySession: async () => {
+                try {
+                    const data = await authService.getSession?.()
+                    return Boolean(data?.session?.user?.recovery_sent_at)
+                } catch {
+                    return false
+                }
+            },
+
         }),
         {
             name: "auth-store",

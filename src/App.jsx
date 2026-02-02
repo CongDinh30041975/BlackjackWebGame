@@ -9,6 +9,7 @@ import IntroducePage from './pages/IntroducePage'
 import DashboardPage from './pages/DashboardPage';
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import ProfilePage from "./pages/ProfilePage";
 
 // Route chỉ cho phép truy cập khi chưa đăng nhập
@@ -61,6 +62,15 @@ function App() {
             </PublicOnlyRoute>
           }
         />
+
+          <Route
+            path="/resetPassword"
+            element={
+              <PublicOnlyRoute>
+                <ResetPasswordPage />
+              </PublicOnlyRoute>
+            }
+          />
 
         <Route
           path="/profile"
