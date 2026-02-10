@@ -14,6 +14,7 @@ function ProfileCard({ onLogout, onSave, onCancel }) {
     const clearProfile = useUserStore((s) => s.clearProfile);
     const error = useUserStore((s) => s.error);
     
+    console.log(profile);
 
     const [name, setName] = useState("");
     const [avatarPreview, setAvatarPreview] = useState(null);

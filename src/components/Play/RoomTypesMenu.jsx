@@ -9,4 +9,4 @@ const ChoosePublicRooms = () => {
   )
 }
 
-export default ChoosePublicRooms
+export default ChoosePublicRooms;

@@ -10,15 +10,14 @@ function RegisterForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    const login = useAuthStore((s) => s.login);
+    const register = useAuthStore((s) => s.register);
     const loading = useAuthStore((s) => s.loading);
     const error = useAuthStore((s) => s.error);
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        setLoading(true);
 
-        const success = await login(email, password);
+        const success = await register(email, password);
         
         if (success) {
             alert('Đăng ký thành công!');
