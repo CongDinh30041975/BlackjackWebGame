@@ -12,6 +12,8 @@ import LoginPage from './pages/LoginPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import ProfilePage from "./pages/ProfilePage";
 
+import RoomTypesPage from './pages/RoomTypesPage'
+
 // Bảo vệ đường dẫn
 function ProtectedRoute({
   allow,          // boolean: điều kiện cho phép
@@ -38,13 +40,13 @@ function App() {
   return (
     <Routes>
       <Route element={<DashboardPage />} >
+
         <Route
           path="/"
           element={
             <IntroducePage />
           }
         />
-
 
         <Route
           path="/auth/login"
@@ -64,14 +66,14 @@ function App() {
           }
         />
 
-          <Route
-            path="/auth/resetPassword"
-            element={
-              <ProtectedRoute allow={!isLoggedIn} redirectTo="/">
-                <ResetPasswordPage />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/auth/resetPassword"
+          element={
+            <ProtectedRoute allow={!isLoggedIn} redirectTo="/">
+              <ResetPasswordPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/user/profile"
@@ -81,6 +83,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route 
+          path="/play/roomType"
+          element={<RoomTypesPage />}
+        />
+
       </Route>
       
 

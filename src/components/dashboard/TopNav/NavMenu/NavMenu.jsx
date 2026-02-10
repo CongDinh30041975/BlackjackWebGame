@@ -6,7 +6,8 @@ function NavMenu() {
     const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
     
     const baseItems = [
-        { icon: "", label: "Chơi" },
+        { to: '/', icon: "", label: 'Giới thiệu'},
+        { to: '/play/roomType', icon: "", label: "Chơi" },
         { icon: "", label: "Hướng dẫn chơi" },
         { icon: "", label: "Bảng xếp hạng" },
     ];
