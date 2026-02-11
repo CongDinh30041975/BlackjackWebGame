@@ -1,10 +1,10 @@
-import React from 'react'
+import { NavLink } from "react-router-dom";
 
 const ChoosePublicRooms = () => {
   return (
     <div>
-      <button>Phòng công khai</button>
-      <button>Phòng riêng</button>
+      <NavLink to='/play/publicRooms'> Phòng công khai </NavLink>
+      <NavLink to='/'> Phòng riêng </NavLink>
     </div>
   )
 }

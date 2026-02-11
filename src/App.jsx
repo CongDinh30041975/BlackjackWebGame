@@ -13,6 +13,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage'
 import ProfilePage from "./pages/ProfilePage";
 
 import RoomTypesPage from './pages/RoomTypesPage'
+import PublicRoomsPage from './pages/PublicRoomsPage'
 
 // Bảo vệ đường dẫn
 function ProtectedRoute({
@@ -78,7 +79,7 @@ function App() {
         <Route
           path="/user/profile"
           element={
-            <ProtectedRoute allow={isLoggedIn} redirectTo="/">
+            <ProtectedRoute allow={isLoggedIn} redirectTo="/auth/login">
               <ProfilePage />,
             </ProtectedRoute>
           }
@@ -87,6 +88,11 @@ function App() {
         <Route 
           path="/play/roomType"
           element={<RoomTypesPage />}
+        />
+
+        <Route
+          path="/play/publicRooms"
+          element={<PublicRoomsPage />}
         />
 
       </Route>
