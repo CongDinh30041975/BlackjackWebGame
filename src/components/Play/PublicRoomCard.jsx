@@ -10,7 +10,7 @@ const PublicRoomCard = ({room}) => {
     }
 
     return (
-        <div className={`room-card ${isFull ? "Đã đầy" : ""}`}>
+        <div className={`room-card ${isFull ? "full" : ""}`}>
             <div className="room-header">
                 <span className="room-code">Mã phòng: {room.room_code}</span>
             </div>

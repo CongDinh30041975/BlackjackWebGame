@@ -1,6 +1,120 @@
-html, body {
+/* ============== ROOT & HTML/BODY SETUP ============== */
+:root {
+    /* Font sizes */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 2.5rem;
+    --spacing-3xl: 3rem;
+    
+    /* Colors */
+    --bg-primary: rgb(219, 248, 248);
+    --color-text: #1a1a1a;
+    --color-border: #e0e0e0;
+    --color-primary: #4285f4;
+    --color-primary-dark: #3a7bc8;
+    --color-danger: #ff4d4f;
+    --color-dark: #193c83;
+}
+
+/* ============== BOX SIZING & BASE STYLES ============== */
+* {
     margin: 0;
     padding: 0;
-    height: 100%;
-    background-color: rgb(219, 248, 248);
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--bg-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    overflow-x: hidden;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ============== RESPONSIVE TYPOGRAPHY ============== */
+@media (max-width: 1024px) {
+    :root {
+        --font-size-base: 0.95rem;
+        --font-size-xl: 1.15rem;
+        --font-size-2xl: 1.4rem;
+        --font-size-3xl: 1.75rem;
+        --font-size-4xl: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-base: 0.9rem;
+        --font-size-lg: 1rem;
+        --font-size-xl: 1.1rem;
+        --font-size-2xl: 1.3rem;
+        --font-size-3xl: 1.6rem;
+        --font-size-4xl: 1.8rem;
+    }
+    
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-base: 0.85rem;
+        --font-size-lg: 0.95rem;
+        --font-size-xl: 1rem;
+        --font-size-2xl: 1.2rem;
+        --font-size-3xl: 1.4rem;
+        --font-size-4xl: 1.6rem;
+    }
+    
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --font-size-base: 0.8rem;
+        --font-size-lg: 0.9rem;
+        --font-size-xl: 0.95rem;
+        --font-size-2xl: 1.1rem;
+        --font-size-3xl: 1.3rem;
+        --font-size-4xl: 1.5rem;
+    }
+    
+    html {
+        font-size: 13px;
+    }
 }
