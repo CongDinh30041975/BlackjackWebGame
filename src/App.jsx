@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 
 import RoomTypesPage from './pages/RoomTypesPage'
 import PublicRoomsPage from './pages/PublicRoomsPage'
+import GamePlayPage from './pages/GamePlayPage'
 
 // Bảo vệ đường dẫn
 function ProtectedRoute({
@@ -93,6 +94,15 @@ function App() {
         <Route
           path="/play/publicRooms"
           element={<PublicRoomsPage />}
+        />
+
+        <Route 
+          path="/play/gameplay"
+          element={
+            <ProtectedRoute allow={true} redirectTo="/auth/login">
+              <GamePlayPage />
+            </ProtectedRoute>
+          }
         />
 
       </Route>

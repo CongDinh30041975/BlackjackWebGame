@@ -26,10 +26,10 @@ export async function uploadAvatar(userId, file) {
 
     // Tải file lên storage/avatars
     const timestamp = Date.now();
-    const safeFileName = timestamp + '.webp';
+    const safeFileName = timestamp;
     const filePath = `${userId}/${safeFileName}`;
     
-    const { error: uploadError, data } = await supabase.storage
+    const { error: uploadError} = await supabase.storage
       .from('avatars')
       .upload(filePath, file, { 
         upsert: true,

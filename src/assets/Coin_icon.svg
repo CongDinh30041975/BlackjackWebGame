@@ -1,0 +1,51 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer shadow -->
+  <circle cx="100" cy="100" r="95" fill="url(#shadowGradient)" />
+  
+  <!-- Main coin body -->
+  <circle cx="100" cy="100" r="90" fill="url(#coinGradient)" />
+  
+  <!-- Outer ring pattern -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#1a1a1a" stroke-width="3" />
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#FFD700" stroke-width="2" />
+  
+  <!-- Decorative segments around edge -->
+  <line x1="175" y1="100" x2="185" y2="100" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="164.95190528383288" y1="137.5" x2="173.61215932167728" y2="143.30127018922194" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="137.5" y1="164.95190528383288" x2="143.30127018922194" y2="173.61215932167728" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="100" y1="175" x2="100" y2="185" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="62.5" y1="164.95190528383288" x2="56.69872981077806" y2="173.61215932167728" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="35.048094716167115" y1="137.5" x2="26.387840678327716" y2="143.30127018922194" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="25" y1="100" x2="15" y2="100" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="35.048094716167115" y1="62.5" x2="26.387840678327716" y2="56.69872981077806" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="62.5" y1="35.048094716167115" x2="56.69872981077806" y2="26.387840678327716" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="100" y1="25" x2="100" y2="15" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="137.5" y1="35.048094716167115" x2="143.30127018922194" y2="26.387840678327716" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  <line x1="164.95190528383288" y1="62.5" x2="173.61215932167728" y2="56.69872981077806" stroke="#FFD700" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Inner circle -->
+  <circle cx="100" cy="100" r="70" fill="url(#innerGradient)" />
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#FFD700" stroke-width="2" />
+  
+  <!-- Letter A -->
+  <text x="100" y="100" font-size="80" font-weight="bold" font-family="Arial, sans-serif" fill="#FFD700" text-anchor="middle" dominant-baseline="central" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">A</text>
+  
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="shadowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.6" />
+    </radialGradient>
+    
+    <radialGradient id="coinGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#8B0000" />
+      <stop offset="50%" stop-color="#DC143C" />
+      <stop offset="100%" stop-color="#8B0000" />
+    </radialGradient>
+    
+    <radialGradient id="innerGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#DC143C" />
+      <stop offset="100%" stop-color="#8B0000" />
+    </radialGradient>
+  </defs>
+</svg>

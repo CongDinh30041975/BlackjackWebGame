@@ -1,0 +1,48 @@
+.player_wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 8%;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    background: radial-gradient(circle,rgba(121, 215, 224, 1) 50%, rgba(148, 187, 233, 1) 100%);
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0rem rgb(12, 12, 12);
+}
+
+.player_wrapper > span {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0.375rem;
+    font-size: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.displayName {
+    text-align: center;
+}
+
+.avatar_img {
+    margin: 0.15rem 0 0.15rem;
+    width: 100%;
+    border-radius: 0.75rem;
+}
+
+.coins {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0rem 0.2rem 0 0rem;
+    background-color: rgb(67, 64, 64);
+    color: red;
+    overflow: visible;
+}
+
+
+.coin_icon {
+    width: 1.5rem;
+    margin-right: 0.2rem;
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+}
