@@ -16,3 +16,44 @@
     height: 100%;
     display: block;
 }
+
+/* Hiển thị các player */
+.p0_n {
+    top: 5%;
+    left: 46%;
+}
+
+.p1_n {
+    left: 46%;
+    bottom: 5%;
+}
+
+.p2_4 {
+    left: 5%;
+    top: 37%
+}
+
+.p3_4 {
+    right: 5%;
+    top: 37%;
+}
+
+.p2_6 {
+    left: 5%;
+    bottom: 15%;
+}
+
+.p3_6 {
+    right: 5%;
+    bottom: 15%;
+}
+
+.p4_6 {
+    left: 5%;
+    top: 15%;
+}
+
+.p5_6 {
+    right: 5%;
+    top: 15%;
+}

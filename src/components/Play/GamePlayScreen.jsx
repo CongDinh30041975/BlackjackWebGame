@@ -4,18 +4,35 @@ import Avatar_placeholder from '../../assets/Avatar_placeholder.webp'
 import useUserStore from '../../stores/userStore'
 import '../../styles/GameplayScreen.css'
 
+
+
 const GamePlayScreen = () => {
-  const profile = useUserStore((s) => s.profile);
+  const max2p = [
+    {className: 'p0_n'},
+    {className: 'p1_n'}
+  ]
+
+  const max4p = [
+    ...max2p,
+    {className: 'p2_4'},
+    {className: 'p3_4'}
+  ]
+
+  const max6p = [
+    ...max2p,
+    {className: 'p2_6'},
+    {className: 'p3_6'},
+    {className: 'p4_6'},
+    {className: 'p5_6'},
+  ]
 
   return (
     <div className='gameplayScreen'>
       <div className='mat'>
         <img className='mat_image' src={Mat_image} alt="Ảnh cái chiếu" />
-        <PlayerDisplay 
-          displayName={profile?.display_name || 'Vô danh'} 
-          avatarUrl={profile?.avatar_url || Avatar_placeholder}
-          coins={profile?.coins}
-        />
+        {max6p.map((player) => (
+          <PlayerDisplay key={player.className} {...player} />
+        ))}
       </div>
       
     </div>
