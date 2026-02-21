@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const ChoosePublicRooms = () => {
+const RoomTypesMenu = () => {
   return (
     <div>
       <NavLink to='/play/publicRooms'> Phòng công khai </NavLink>
@@ -9,4 +9,4 @@ const ChoosePublicRooms = () => {
   )
 }
 
-export default ChoosePublicRooms;
+export default RoomTypesMenu;

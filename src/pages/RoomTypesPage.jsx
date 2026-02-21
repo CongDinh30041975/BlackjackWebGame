@@ -1,4 +1,4 @@
-import RoomTypesMenu from '../components/play/RoomTypesMenu'
+import RoomTypesMenu from '../components/room/RoomTypesMenu'
 
 const RoomTypesPage = () => {
   return (

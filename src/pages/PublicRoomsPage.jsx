@@ -1,4 +1,4 @@
-import PublicRoomsMenu from "../components/play/PublicRoomsMenu"
+import PublicRoomsMenu from "../components/room/PublicRoomsMenu"
 
 const PublicRoomsPage = () => {
   return (

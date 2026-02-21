@@ -1,6 +1,12 @@
 import React from 'react'
 
-const PublicRoomCard = ({room}) => {
+const RoomCard = ({room}) => {
+    if(!room) {
+        return (
+            <p>Phòng không tồn tại</p>
+        )
+    }
+
     const isFull = room.current_players >= room.max_players;
 
     function joinRoom() {
@@ -22,7 +28,12 @@ const PublicRoomCard = ({room}) => {
                 <br />
 
                 <span>
-                    Số người chơi: {room.current_players} / {room.max_players}
+                    Số người chơi: {room.player_count} / {room.max_players}
+                </span>
+
+                <br />
+                <span>
+                    Trạng thái: {room.state}
                 </span>
             </div>
 
@@ -33,4 +44,4 @@ const PublicRoomCard = ({room}) => {
     );
 }
 
-export default PublicRoomCard
+export default RoomCard
