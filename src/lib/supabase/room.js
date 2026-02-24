@@ -1,20 +1,6 @@
 import { supabase } from "./supabase";
 
 /* ================= ROOMS ================= */
-// Đếm số người chơi trong 1 phòng
-export async function countPlayersInRoom(roomId) {
-  try {
-    const { data, error } = await supabase
-      .rpc('count_players_in_room', { room_id: roomId })
-
-    if (error) throw error;
-
-    return { data: data ?? null, error: null };
-  } catch (err) {
-    console.error("countPlayersInRoom error:", err);
-    return { data: [], error: err };
-  }
-}
 
 // Lấy 1 room bằng code và đếm số người chơi
 export async function fetchRoomByCode(roomCode) {
@@ -28,13 +14,9 @@ export async function fetchRoomByCode(roomCode) {
 
     if (roomError) throw roomError;
     if (!room) return { data: null, error: null };
-
-    // Lấy sô player
-    const {data: playerCount, error: playerCountError} = await countPlayersInRoom(room.id);
-    if(playerCountError) throw playerCountError;
   
     return {
-      data: { ...room, player_count: playerCount ?? 0 },
+      data: room,
       error: null,
     };
   } catch (err) {

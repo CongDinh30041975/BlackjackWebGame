@@ -1,4 +1,5 @@
 import React from 'react'
+import useGameStore from '../../stores/gameStore';
 
 const RoomCard = ({room}) => {
     if(!room) {
@@ -11,7 +12,6 @@ const RoomCard = ({room}) => {
 
     function joinRoom() {
         if (isFull) return alert("Room is full");
-        console.log("join room", room.id);
         // TODO: call joinRoom RPC
     }
 
@@ -28,7 +28,7 @@ const RoomCard = ({room}) => {
                 <br />
 
                 <span>
-                    Số người chơi: {room.player_count} / {room.max_players}
+                    Số người chơi: {room.current_players} / {room.max_players}
                 </span>
 
                 <br />

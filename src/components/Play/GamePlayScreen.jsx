@@ -1,6 +1,6 @@
 import Mat_image from '../../assets/Mat_image.webp'
 import PlayerDisplay from './PlayerDisplay'
-import useUserStore from '../../stores/userStore'
+import useGameStore from '../../stores/gameStore'
 import '../../styles/GameplayScreen.css'
 
 const GamePlayScreen = () => {
@@ -22,6 +22,10 @@ const GamePlayScreen = () => {
     {className: 'p4_6'},
     {className: 'p5_6'},
   ]
+
+  const room = useGameStore((s) => s.room);
+  const players = useGameStore((s) => s.players);
+  
 
   return (
     <div className='gameplayScreen'>

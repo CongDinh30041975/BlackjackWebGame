@@ -1,13 +1,12 @@
 import { create } from 'zustand'
-import {useAuthStore} from './authStore'
+import useAuthStore from './authStore'
 import {
     createPlayer,
-    fetchPlayers,
     fetchPlayers,
     subscribeRoom,
 } from '../lib/supabase/room'
 
-export const useGameStore = create((set, get) => ({
+const useGameStore = create((set, get) => ({
     room: null,
     players: [],
     me: null,
@@ -17,18 +16,17 @@ export const useGameStore = create((set, get) => ({
     loading: false,
     error: null,
 
-    userId: useAuthStore((s) => s.user.id),
-
-    initRoom: async (room, userId) => {
+    initRoom: async (room) => {
         set({ loading: true, error: null })
 
         try {
             const [players] = await fetchPlayers(room.id)
 
-            const me = players.find(p => p.user_id === userId) ?? null
+            const currentUserId = useAuthStore.getState().user?.id || null
+            const me = players.find(p => p.user_id === currentUserId) ?? null
             const host = players.find(p => p.is_host) ?? null
 
-            const channel = subscribeRoom(roomId, {
+            const channel = subscribeRoom(room.id, {
                 onRoomChange: (newRoom) => {
                     set({ room: newRoom })
                 },
@@ -44,9 +42,10 @@ export const useGameStore = create((set, get) => ({
                             updated = state.players.filter(p => p.id !== player.id)
                         }
 
+                        const currentUserId = useAuthStore.getState().user?.id || null
                         return {
                             players: updated,
-                            me: updated.find(p => p.user_id === userId) ?? null,
+                            me: updated.find(p => p.user_id === currentUserId) ?? null,
                             host: updated.find(p => p.is_host) ?? null,
                         }
                     })
@@ -67,3 +66,5 @@ export const useGameStore = create((set, get) => ({
     }
 
 }))
+
+export default useGameStore;

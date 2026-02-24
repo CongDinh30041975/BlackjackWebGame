@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import * as authService from "../lib/supabase/auth";
 import useUserStore from './userStore';
 
-export const useAuthStore = create(
+const useAuthStore = create(
     persist(
         (set) => ({
             session: null,
@@ -155,3 +155,5 @@ export const useAuthStore = create(
         }
     )
 );
+
+export default useAuthStore;

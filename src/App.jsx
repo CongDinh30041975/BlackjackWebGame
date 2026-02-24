@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigate } from "react-router-dom";
 
 import useAuthStore from './stores/authStore';
+import useGameStore from "./stores/gameStore";
 
 // Pages
 import IntroducePage from './pages/IntroducePage'
@@ -32,6 +33,7 @@ function ProtectedRoute({
 function App() {
   const restoreSession = useAuthStore((s) => s.restoreSession);  
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const room = useGameStore((s) => s.room);
 
   useEffect(() => {
     // Khôi phục session từ Supabase khi app khởi động
@@ -87,15 +89,22 @@ function App() {
 
         <Route
           path="/room/roomLobby"
-          element={<RoomLobbyPage />}
+          element={
+            <ProtectedRoute allow={!room} redirectTo="/play/gameplay">
+              <RoomLobbyPage />
+            </ProtectedRoute>
+          }
         />
 
         <Route 
           path="/play/gameplay"
           element={
-            <ProtectedRoute allow={true} redirectTo="/auth/login">
-              <GamePlayPage />
+            <ProtectedRoute allow={isLoggedIn} redirectTo="/auth/login">
+              <ProtectedRoute allow={room} redirectTo="/room/roomLobby">
+                <GamePlayPage />
+              </ProtectedRoute>
             </ProtectedRoute>
+            
           }
         />
 
