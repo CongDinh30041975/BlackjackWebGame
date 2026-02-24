@@ -22,9 +22,16 @@ const GamePlayScreen = () => {
     {className: 'p4_6'},
     {className: 'p5_6'},
   ]
+  
+  const room = useGameStore((s) => s.room)
+  const players = useGameStore((s) => s.players)
+  const me = useGameStore((s) => s.me)
+  const host = useGameStore((s) => s.host)
 
-  const room = useGameStore((s) => s.room);
-  const players = useGameStore((s) => s.players);
+  const loading = useGameStore((s) => s.loading)
+  const error = useGameStore((s) => s.error)
+
+  
   
 
   return (

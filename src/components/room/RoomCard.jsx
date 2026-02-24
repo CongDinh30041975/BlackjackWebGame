@@ -10,9 +10,12 @@ const RoomCard = ({room}) => {
 
     const isFull = room.current_players >= room.max_players;
 
+    const { initRoom } = useGameStore();
+
     function joinRoom() {
         if (isFull) return alert("Room is full");
-        // TODO: call joinRoom RPC
+        
+        initRoom(room);
     }
 
     return (

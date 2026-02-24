@@ -47,10 +47,7 @@ export async function getPublicRooms() {
 export async function createPlayer(roomId, userId) {
   try {
     const { data, error } = await supabase
-      .from('players')
-      .insert({room_id: roomId, user_id: userId})
-      .select()
-      .single()
+      .rpc('create_player', {room_id: roomId, user_id: userId})
     
     if (error) throw error;
     return {data, error: null}
@@ -59,6 +56,29 @@ export async function createPlayer(roomId, userId) {
   catch (err) {
     console.error('Lỗi tạo player:', err);
     return { data: null, error: err };
+  }
+}
+
+// Kiểm tra mình có player trong bảng đó đang hoạt động hay không
+export async function fetchMyPlayer(roomId, userId) {
+  try {
+    const {data, error} = await supabase
+      .from('players')
+      .select('*')
+      .eq('room_id', roomId)
+      .eq('user_id', userId)
+      .maybeSingle()
+
+    if(error) throw error;
+    if(data) {
+      return {data: true, error: null}
+    }
+    return {data: false, error: null}
+  }
+  
+  catch (err) {
+    console.error('Lỗi lấy player, ', err)
+    return {data: false, error: err}
   }
 }
 
