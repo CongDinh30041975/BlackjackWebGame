@@ -17,7 +17,6 @@ const RoomLobby = () => {
     e.preventDefault();
 
     await loadRoom(roomCode);
-    if(room) console.log(room);
   }
 
   return (

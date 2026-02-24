@@ -7,7 +7,7 @@ function NavMenu() {
     
     const baseItems = [
         { to: '/', icon: "", label: 'Giới thiệu'},
-        { to: '/play/roomType', icon: "", label: "Chơi" },
+        { to: '/room/roomLobby', icon: "", label: "Chơi" },
         { icon: "", label: "Hướng dẫn chơi" },
         { icon: "", label: "Bảng xếp hạng" },
     ];

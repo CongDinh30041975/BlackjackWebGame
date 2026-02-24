@@ -12,8 +12,6 @@ import LoginPage from './pages/LoginPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import ProfilePage from "./pages/ProfilePage";
 
-import RoomTypesPage from './pages/RoomTypesPage'
-import PublicRoomsPage from './pages/PublicRoomsPage'
 import RoomLobbyPage from './pages/RoomLobbyPage'
 import GamePlayPage from './pages/GamePlayPage'
 
@@ -85,16 +83,6 @@ function App() {
               <ProfilePage />,
             </ProtectedRoute>
           }
-        />
-
-        <Route 
-          path="/play/roomType"
-          element={<RoomTypesPage />}
-        />
-
-        <Route
-          path="/play/publicRooms"
-          element={<PublicRoomsPage />}
         />
 
         <Route

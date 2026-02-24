@@ -60,5 +60,63 @@ export async function getPublicRooms() {
     }
 }
 
+// Code liên quan đến gameplay
+// Tạo player
+export async function createPlayer(roomId, userId) {
+  try {
+    const { data, error } = await supabase
+      .from('players')
+      .insert({room_id: roomId, user_id: userId})
+      .select()
+      .single()
+    
+    if (error) throw error;
+    return {data, error: null}
+  }
 
+  catch (err) {
+    console.error('Lỗi tạo player:', err);
+    return { data: null, error: err };
+  }
+}
 
+// Lấy danh sách player
+export async function fetchPlayers(roomId) {
+  try {
+    const { data, error } = await supabase
+      .from('players')
+      .select('*')
+      .eq('room_id', roomId)
+
+    if(error) throw error;
+    return {data, error: null};
+  }
+
+  catch (err) {
+    console.error('Lỗi lấy danh sách player:', err);
+    return { data: null, error: err };
+  }
+}
+
+// Realtime cho game
+export function subscribeRoom(roomId, callbacks) {
+  return supabase
+    .channel(`room:${roomId}`)
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'rooms',
+      filter: `id=eq.${roomId}`
+    }, (payload) => {
+      callbacks.onRoomChange(payload.new)
+    })
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'players',
+      filter: `room_id=eq.${roomId}`
+    }, (payload) => {
+      callbacks.onPlayerChange(payload.eventType, payload.new || payload.old)
+    })
+    .subscribe()
+}

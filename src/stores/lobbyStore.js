@@ -10,7 +10,7 @@ export const useLobbyStore = create((set, get) => ({
 
     // ===== LOAD =====
     loadRoom: async (roomCode) => {
-        set({ loading: true, fetching: true, error: null });
+        set({ loading: true, error: null });
 
         const { data, error } = await fetchRoomByCode(roomCode);
 
