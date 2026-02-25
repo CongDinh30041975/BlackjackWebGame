@@ -15,7 +15,7 @@ const RoomCard = ({room}) => {
     function joinRoom() {
         if (isFull) return alert("Room is full");
         
-        initRoom(room);
+        initRoom(room?.id);
     }
 
     return (

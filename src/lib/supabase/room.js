@@ -2,7 +2,7 @@ import { supabase } from "./supabase";
 
 /* ================= ROOMS ================= */
 
-// Lấy 1 room bằng code và đếm số người chơi
+// Lấy 1 room bằng code
 export async function fetchRoomByCode(roomCode) {
   try {
     // lấy thông tin phòng
@@ -22,6 +22,23 @@ export async function fetchRoomByCode(roomCode) {
   } catch (err) {
     console.error('fetchRoomByCode error:', err);
     return { data: null, error: err };
+  }
+}
+
+// Lấy 1 phòng bằng roomId
+export const fetchRoomById = async (roomId) => {
+  try {
+    const {data, error} = await supabase
+      .from('rooms')
+      .select('*')      
+      .eq('id', roomId)
+      .maybeSingle()
+
+    if(error) throw error
+    return {data: data, error: null}
+  } catch (err) {
+    console.error('Lỗi lấy phòng, ', err)
+    return {data: null, error: err}
   }
 }
 

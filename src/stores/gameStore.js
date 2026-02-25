@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from "zustand/middleware";
 import useAuthStore from './authStore'
 import {
+    fetchRoomById,
     createPlayer,
     fetchMyPlayer,
     fetchPlayers,
@@ -21,18 +22,19 @@ const useGameStore = create(
         error: null,
 
 
-        initRoom: async (room) => {
-            set({room: room, loading: true, error: null })
+        initRoom: async (roomId) => {
+            set({loading: true, error: null })
 
             try {
+                const {data: room} = await fetchRoomById(roomId)
                 const currentUserId = useAuthStore.getState().user?.id || null
 
                 // Kiểm tra có player không
-                const {data: exist} = await fetchMyPlayer(room.id, currentUserId)
+                const {data: exist} = await fetchMyPlayer(roomId, currentUserId)
                 if(!exist) {
-                    await createPlayer(room.id, currentUserId)
+                    await createPlayer(roomId, currentUserId)
                 }            
-                const [players] = await fetchPlayers(room.id)
+                const { data: players} = await fetchPlayers(roomId)
                 
                 const me = players.find(p => p.user_id === currentUserId) ?? null
                 const host = players.find(p => p.is_host) ?? null
@@ -75,7 +77,15 @@ const useGameStore = create(
             set({ room: null, players: [], me: null, host: null, channel: null, loading: false, error: null })
         }
 
-    }))
-)
+    }),
+    {
+        name: 'game-store',
+        // avoid storing the realtime channel (circular) in localStorage
+        partialize: (state) => {
+            const { channel, ...rest } = state
+            return rest
+        }
+    }
+))
 
 export default useGameStore;

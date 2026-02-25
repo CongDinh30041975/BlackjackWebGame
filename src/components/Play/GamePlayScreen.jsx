@@ -31,8 +31,11 @@ const GamePlayScreen = () => {
   const loading = useGameStore((s) => s.loading)
   const error = useGameStore((s) => s.error)
 
-  
-  
+  const cleanup = useGameStore((s) => s.cleanup)
+
+  const handleLeaveRoom = () => {
+    cleanup();
+  }
 
   return (
     <div className='gameplayScreen'>
@@ -41,6 +44,7 @@ const GamePlayScreen = () => {
         {max5p.map((player) => (
           <PlayerDisplay key={player.className} {...player} />
         ))}
+        <button className='leave' onClick={handleLeaveRoom}>Rời phòng</button>
       </div>
       
     </div>
