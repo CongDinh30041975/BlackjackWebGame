@@ -1,5 +1,6 @@
 .gameplayScreen {
     display: flex;
+    position: relative;
     width: 100%;
     justify-content: center;
 }
@@ -19,13 +20,13 @@
 
 /* Hiển thị các player */
 .p0_n {
-    top: 5%;
-    left: 46%;
-}
-
-.p1_n {
     left: 46%;
     bottom: 5%;
+}
+
+.p1_n {    
+    top: 5%;
+    left: 46%;
 }
 
 .p2_4 {
@@ -57,3 +58,16 @@
     right: 5%;
     top: 15%;
 }
+
+/* Các nút */
+.leave {
+    position: absolute;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    top: 92%;
+    left: 3%
+    
+}
+

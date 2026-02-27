@@ -46,3 +46,8 @@
     left: 0;
     top: 0.45rem;
 }
+
+.host {
+    border-width: 2rem;
+    border-color: black;
+}

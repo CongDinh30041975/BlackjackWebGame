@@ -76,6 +76,23 @@ export async function createPlayer(roomId, userId) {
   }
 }
 
+// Xóa player của mình (Dùng cho thoát phòng)
+export const deleteMyPlayer = async (playerId) => {
+  try {
+    const {error} = await supabase
+      .from('players')
+      .delete()
+      .eq('id', playerId)
+
+    if(error) throw error
+    return {data: true, error: null}
+
+  } catch (error) {
+    console.error('Lỗi xóa player, ', error)
+    return {data: false, error: error}
+  }
+}
+
 // Kiểm tra mình có player trong bảng đó đang hoạt động hay không
 export async function fetchMyPlayer(roomId, userId) {
   try {
@@ -104,7 +121,13 @@ export async function fetchPlayers(roomId) {
   try {
     const { data, error } = await supabase
       .from('players')
-      .select('*')
+      .select(`
+        *,
+        profiles (
+            display_name,
+            avatar_url
+        )`
+      )
       .eq('room_id', roomId)
 
     if(error) throw error;
@@ -119,7 +142,7 @@ export async function fetchPlayers(roomId) {
 
 // Realtime cho game
 export function subscribeRoom(roomId, callbacks) {
-  return supabase
+  const channel = supabase
     .channel(`room:${roomId}`)
     .on('postgres_changes', {
       event: '*',
@@ -127,6 +150,7 @@ export function subscribeRoom(roomId, callbacks) {
       table: 'rooms',
       filter: `id=eq.${roomId}`
     }, (payload) => {
+      console.log('Room change:', payload)
       callbacks.onRoomChange(payload.new)
     })
     .on('postgres_changes', {
@@ -135,7 +159,17 @@ export function subscribeRoom(roomId, callbacks) {
       table: 'players',
       filter: `room_id=eq.${roomId}`
     }, (payload) => {
-      callbacks.onPlayerChange(payload.eventType, payload.new || payload.old)
+      console.log('Player change payload:', payload)
+
+      const data = payload.eventType === 'DELETE' 
+        ? payload.old 
+        : payload.new
+
+      callbacks.onPlayerChange(payload.eventType, data)
     })
-    .subscribe()
+    .subscribe((status) => {
+      console.log('Subscription status:', status)
+    })
+
+  return channel
 }

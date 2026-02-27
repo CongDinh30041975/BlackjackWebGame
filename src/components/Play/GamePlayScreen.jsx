@@ -1,6 +1,8 @@
+import { useMemo } from 'react'
 import Mat_image from '../../assets/Mat_image.webp'
 import PlayerDisplay from './PlayerDisplay'
 import useGameStore from '../../stores/gameStore'
+import { deleteMyPlayer } from '../../lib/supabase/room'
 import '../../styles/GameplayScreen.css'
 
 const GamePlayScreen = () => {
@@ -33,20 +35,62 @@ const GamePlayScreen = () => {
 
   const cleanup = useGameStore((s) => s.cleanup)
 
-  const handleLeaveRoom = () => {
+  const sortPlayers = useMemo(() => {
+    if (!players || !me) return []
+
+    const others = players.filter(
+      p => p.id !== me.id && !p.is_host
+    )
+
+    return me.is_host
+      ? [me, ...others]
+      : [me, host, ...others]
+  }, [players, me, host])
+
+  console.log(players)
+
+  const handleLeaveRoom = async () => {
+    await deleteMyPlayer(me.id)
     cleanup();
+  }
+
+  // Tạo layout chỗ ngồi
+  let seatLayout = []
+  if(room.max_players <= 1) {
+    seatLayout = max1p.slice(0, room.max_players + 1)
+  }
+  else if(room.max_players <= 3) {
+    seatLayout = max3p.slice(0, room.max_players + 1)
+  }
+  else {
+    seatLayout = max5p.slice(0, room.max_players + 1)
   }
 
   return (
     <div className='gameplayScreen'>
       <div className='mat'>
         <img className='mat_image' src={Mat_image} alt="Ảnh cái chiếu" />
-        {max5p.map((player) => (
-          <PlayerDisplay key={player.className} {...player} />
-        ))}
-        <button className='leave' onClick={handleLeaveRoom}>Rời phòng</button>
+
+        {/* Hiển thị các player lên UI */}
+        {sortPlayers.map((p, i) => {
+          const seat = seatLayout[i] || {}
+          const { display_name, avatar_url } = p.profiles || {}
+
+          return (
+            <PlayerDisplay
+              key={p.id}
+              className={seat.className}
+              displayName={display_name}
+              avatarUrl={avatar_url}
+              coins={p.coins}
+            />
+          )
+        })}
+
+        
       </div>
       
+      <button className='leave' onClick={handleLeaveRoom}>Rời phòng</button>
     </div>
   )
 }

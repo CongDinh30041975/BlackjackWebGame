@@ -44,6 +44,7 @@ const useGameStore = create(
                         set({ room: newRoom })
                     },
                     onPlayerChange: (event, player) => {
+                        console.log('Player event:', event, player)
                         set((state) => {
                             let updated
 
@@ -51,10 +52,12 @@ const useGameStore = create(
                                 updated = [...state.players, player]
                             } else if (event === 'UPDATE') {
                                 updated = state.players.map(p => p.id === player.id ? player : p)
-                            } else {
+                            } else if (event === 'DELETE') {
                                 updated = state.players.filter(p => p.id !== player.id)
+                            } else {
+                                console.warn('Unknown event type:', event)
+                                updated = state.players
                             }
-
                             return {
                                 players: updated,
                                 me: updated.find(p => p.user_id === currentUserId) ?? null,
@@ -84,7 +87,8 @@ const useGameStore = create(
         partialize: (state) => {
             const { channel, ...rest } = state
             return rest
-        }
+        },
+        version: 1
     }
 ))
 
