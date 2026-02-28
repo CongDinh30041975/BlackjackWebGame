@@ -1,5 +1,6 @@
 import Avatar_placeholder from '../../assets/Avatar_placeholder.webp'
 import Coin_icon from '../../assets/Coin_icon.svg'
+import CardDisplay from './CardDisplay'
 import '../../styles/PlayerDisplay.css'
 
 const PlayerDisplay = ({ displayName, avatarUrl, coins, className }) => {
