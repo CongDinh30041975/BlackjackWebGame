@@ -41,6 +41,11 @@ export const useGameStore = create(
                 const me = players.find(p => p.user_id === currentUserId) ?? null
                 const host = players.find(p => p.is_host) ?? null
 
+                const existingChannel = get().channel
+                if (existingChannel) {
+                    existingChannel.unsubscribe()
+                }
+            
                 const channel = subscribeRoom(room.id, {
                     onRoomChange: (newRoom) => {
                         set({ room: newRoom })
@@ -79,6 +84,7 @@ export const useGameStore = create(
                         }
                     }
                 })
+                console.log('subscribed to room', room.id, 'channel', channel)
 
                 set({ room, players, me, host, channel })
             } catch (error) {

@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useEffect } from 'react'
 import Mat_image from '../../assets/Mat_image.webp'
 import PlayerDisplay from './PlayerDisplay'
 import {useGameStore} from '../../stores/gameStore'
@@ -33,7 +34,14 @@ const GamePlayScreen = () => {
   const loading = useGameStore((s) => s.loading)
   const error = useGameStore((s) => s.error)
 
+  const initRoom = useGameStore((s) => s.initRoom)
   const cleanup = useGameStore((s) => s.cleanup)
+
+  useEffect(() => {    
+    if (room) {
+      initRoom(room.id)
+    }
+  }, [])
 
   const sortPlayers = useMemo(() => {
     if (!players || !me) return []
