@@ -1,12 +1,18 @@
 import Avatar_placeholder from '../../assets/Avatar_placeholder.webp'
 import Coin_icon from '../../assets/Coin_icon.svg'
+import { GiCrownedHeart } from "react-icons/gi";
 import CardDisplay from './CardDisplay'
 import '../../styles/PlayerDisplay.css'
 
-const PlayerDisplay = ({ displayName, avatarUrl, coins, className }) => {
+const PlayerDisplay = ({ displayName, avatarUrl, coins, className, isHost = false }) => {
   const wrapperClass = ['player_wrapper', className].filter(Boolean).join(' ')
   return (
     <div className={wrapperClass}>
+      {isHost && (
+        <i className='crown'>
+          <GiCrownedHeart />
+        </i>
+      )}
       <span className='coins'>
         <img src={Coin_icon} alt='coin' className='coin_icon' />
         {coins || 0}

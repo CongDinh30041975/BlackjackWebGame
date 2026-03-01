@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { persist } from "zustand/middleware";
 import useAuthStore from './authStore'
+import { supabase } from '../lib/supabase/supabase';
 import {
     fetchRoomById,
     createPlayer,
     hasPlayerInRoom,
+    fetchPlayer,
     fetchPlayers,
     subscribeRoom,
 } from '../lib/supabase/room'
@@ -43,27 +45,38 @@ export const useGameStore = create(
                     onRoomChange: (newRoom) => {
                         set({ room: newRoom })
                     },
-                    onPlayerChange: (event, player) => {
+                    onPlayerChange: async (event, player) => {
                         console.log('Player event:', event, player)
-                        set((state) => {
-                            let updated
 
-                            if (event === 'INSERT') {
-                                updated = [...state.players, player]
-                            } else if (event === 'UPDATE') {
-                                updated = state.players.map(p => p.id === player.id ? player : p)
-                            } else if (event === 'DELETE') {
-                                updated = state.players.filter(p => p.id !== player.id)
-                            } else {
-                                console.warn('Unknown event type:', event)
-                                updated = state.players
-                            }
-                            return {
-                                players: updated,
-                                me: updated.find(p => p.user_id === currentUserId) ?? null,
-                                host: updated.find(p => p.is_host) ?? null,
-                            }
-                        })
+                        if (event === 'INSERT') {
+                            const { data: playerWithProfile } = await fetchPlayer(player.id)
+                            set((state) => {
+                                const updated = [...state.players, playerWithProfile]
+                                return {
+                                    players: updated,
+                                    me: updated.find(p => p.user_id === currentUserId) ?? null,
+                                    host: updated.find(p => p.is_host) ?? null,
+                                }
+                            })
+
+                        } else {
+                            set((state) => {
+                                let updated
+                                if (event === 'UPDATE') {
+                                    updated = state.players.map(p => p.id === player.id ? { ...p, ...player } : p)
+                                } else if (event === 'DELETE') {
+                                    updated = state.players.filter(p => p.id !== player.id)
+                                } else {
+                                    console.warn('Unknown event type:', event)
+                                    updated = state.players
+                                }
+                                return {
+                                    players: updated,
+                                    me: updated.find(p => p.user_id === currentUserId) ?? null,
+                                    host: updated.find(p => p.is_host) ?? null,
+                                }
+                            })
+                        }
                     }
                 })
 

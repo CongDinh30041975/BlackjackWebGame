@@ -50,7 +50,9 @@
     top: 5%;
 }
 
-.host {
-    border-width: 2rem;
-    border-color: black;
+.crown {
+    position: absolute;
+    font-size: 200%;
+    top: -30%;
+    left: 30%;
 }

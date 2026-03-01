@@ -61,8 +61,8 @@ export const createRoom = async (betAmount, maxPlayers) => {
   try {
     const { data, error } = await supabase
       .rpc('create_room_with_host', 
-        {bet_amount: betAmount},
-        {max_players: maxPlayers})
+        {bet_amount: betAmount, 
+        max_players: maxPlayers})
 
     if(error) throw error
     return {data}
@@ -122,6 +122,32 @@ export async function hasPlayerInRoom(roomId) {
   } catch (err) {
     console.error('Lỗi lấy player, ', err)
     return {data: false}
+  }
+}
+
+// Lấy 1 player
+export const fetchPlayer = async (playerId) => {
+  try {
+    const { data, error } = await supabase
+      .from('players')
+      .select(`        
+        id,
+        is_host,
+        profiles (
+          display_name,
+          avatar_url,
+          coins
+        )`
+      )
+      .eq('id', playerId)
+      .single()
+
+    if(error) throw error
+    return {data}
+
+  } catch (error) {
+    console.error('Lỗi lấy player', error)
+    return {data: null}
   }
 }
 

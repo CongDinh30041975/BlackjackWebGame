@@ -52,6 +52,7 @@ const GamePlayScreen = () => {
     cleanup();
   }
 
+
   // Tạo layout chỗ ngồi
   let seatLayout = []
   if(room.max_players <= 1) {
@@ -66,7 +67,11 @@ const GamePlayScreen = () => {
 
   return (
     <div className='gameplayScreen'>
-      <span className='roomCode'>{room.room_code}</span>
+      <div className='room-info'>
+        <span className='roomCode'>Mã phòng: {room.room_code}</span>
+        <span>Mức cược: {room.bet_amount}</span>
+      </div>
+      
 
       <div className='mat'>
         <img className='mat_image' src={Mat_image} alt="Ảnh cái chiếu" />
@@ -83,6 +88,7 @@ const GamePlayScreen = () => {
               displayName={display_name}
               avatarUrl={avatar_url}
               coins={coins}
+              isHost={p.is_host}
             />
           )
         })}

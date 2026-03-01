@@ -71,3 +71,15 @@
     
 }
 
+.room-info {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 0%;
+    top: 2%;
+    background-color: aliceblue;
+    font-size: 90%;
+    border: 0.2rem solid rgb(136, 219, 133);
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+}
