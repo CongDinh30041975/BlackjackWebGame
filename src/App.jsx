@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigate } from "react-router-dom";
 
 import useAuthStore from './stores/authStore';
-import useGameStore from "./stores/gameStore";
+import {useGameStore} from "./stores/gameStore";
 
 // Pages
 import IntroducePage from './pages/IntroducePage'

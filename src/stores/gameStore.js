@@ -4,12 +4,12 @@ import useAuthStore from './authStore'
 import {
     fetchRoomById,
     createPlayer,
-    fetchMyPlayer,
+    hasPlayerInRoom,
     fetchPlayers,
     subscribeRoom,
 } from '../lib/supabase/room'
 
-const useGameStore = create(
+export const useGameStore = create(
     persist(
         (set, get) => ({
         room: null,
@@ -30,7 +30,7 @@ const useGameStore = create(
                 const currentUserId = useAuthStore.getState().user?.id || null
 
                 // Kiểm tra có player không
-                const {data: exist} = await fetchMyPlayer(roomId, currentUserId)
+                const {data: exist} = await hasPlayerInRoom(roomId)
                 if(!exist) {
                     await createPlayer(roomId, currentUserId)
                 }            
@@ -91,5 +91,3 @@ const useGameStore = create(
         version: 1
     }
 ))
-
-export default useGameStore;

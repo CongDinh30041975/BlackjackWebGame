@@ -15,13 +15,10 @@ export async function fetchRoomByCode(roomCode) {
     if (roomError) throw roomError;
     if (!room) return { data: null, error: null };
   
-    return {
-      data: room,
-      error: null,
-    };
+    return { data: room };
   } catch (err) {
     console.error('fetchRoomByCode error:', err);
-    return { data: null, error: err };
+    return { data: null };
   }
 }
 
@@ -35,10 +32,10 @@ export const fetchRoomById = async (roomId) => {
       .maybeSingle()
 
     if(error) throw error
-    return {data: data, error: null}
+    return {data: data }
   } catch (err) {
     console.error('Lỗi lấy phòng, ', err)
-    return {data: null, error: err}
+    return {data: null }
   }
 }
 
@@ -52,11 +49,28 @@ export async function getPublicRooms() {
 
       if (error) throw error;
 
-      return { data: data ?? [], error: null };
+      return { data: data ?? [] };
     } catch (err) {
       console.error("getPublicRooms error:", err);
-      return { data: [], error: err };
+      return { data: [] };
     }
+}
+
+// Tạo phòng mới với bản thân là host
+export const createRoom = async (betAmount, maxPlayers) => {
+  try {
+    const { data, error } = await supabase
+      .rpc('create_room_with_host', 
+        {bet_amount: betAmount},
+        {max_players: maxPlayers})
+
+    if(error) throw error
+    return {data}
+    
+  } catch (error) {
+    console.error('Lỗi tạo phòng, ', error)
+    return {data: null}
+  }
 }
 
 // Code liên quan đến gameplay
@@ -67,12 +81,12 @@ export async function createPlayer(roomId, userId) {
       .rpc('create_player', {room_id: roomId, user_id: userId})
     
     if (error) throw error;
-    return {data, error: null}
+    return { data }
   }
 
   catch (err) {
     console.error('Lỗi tạo player:', err);
-    return { data: null, error: err };
+    return { data: null };
   }
 }
 
@@ -85,34 +99,29 @@ export const deleteMyPlayer = async (playerId) => {
       .eq('id', playerId)
 
     if(error) throw error
-    return {data: true, error: null}
+    return {data: true}
 
   } catch (error) {
     console.error('Lỗi xóa player, ', error)
-    return {data: false, error: error}
+    return {data: false}
   }
 }
 
 // Kiểm tra mình có player trong bảng đó đang hoạt động hay không
-export async function fetchMyPlayer(roomId, userId) {
+export async function hasPlayerInRoom(roomId) {
   try {
     const {data, error} = await supabase
-      .from('players')
-      .select('*')
-      .eq('room_id', roomId)
-      .eq('user_id', userId)
-      .maybeSingle()
+      .rpc('is_player_in_room', {p_room_id: roomId})
 
     if(error) throw error;
     if(data) {
-      return {data: true, error: null}
+      return {data: true}
     }
-    return {data: false, error: null}
-  }
-  
-  catch (err) {
+    return {data: false}
+
+  } catch (err) {
     console.error('Lỗi lấy player, ', err)
-    return {data: false, error: err}
+    return {data: false}
   }
 }
 
@@ -124,19 +133,20 @@ export async function fetchPlayers(roomId) {
       .select(`
         *,
         profiles (
-            display_name,
-            avatar_url
+          display_name,
+          avatar_url,
+          coins
         )`
       )
       .eq('room_id', roomId)
 
     if(error) throw error;
-    return {data, error: null};
+    return {data};
   }
 
   catch (err) {
     console.error('Lỗi lấy danh sách player:', err);
-    return { data: null, error: err };
+    return { data: null };
   }
 }
 

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import Mat_image from '../../assets/Mat_image.webp'
 import PlayerDisplay from './PlayerDisplay'
-import useGameStore from '../../stores/gameStore'
+import {useGameStore} from '../../stores/gameStore'
 import { deleteMyPlayer } from '../../lib/supabase/room'
 import '../../styles/GameplayScreen.css'
 
@@ -47,8 +47,6 @@ const GamePlayScreen = () => {
       : [me, host, ...others]
   }, [players, me, host])
 
-  console.log(players)
-
   const handleLeaveRoom = async () => {
     await deleteMyPlayer(me.id)
     cleanup();
@@ -68,13 +66,15 @@ const GamePlayScreen = () => {
 
   return (
     <div className='gameplayScreen'>
+      <span className='roomCode'>{room.room_code}</span>
+
       <div className='mat'>
         <img className='mat_image' src={Mat_image} alt="Ảnh cái chiếu" />
 
         {/* Hiển thị các player lên UI */}
         {sortPlayers.map((p, i) => {
           const seat = seatLayout[i] || {}
-          const { display_name, avatar_url } = p.profiles || {}
+          const { display_name, avatar_url, coins } = p.profiles || {}
 
           return (
             <PlayerDisplay
@@ -82,7 +82,7 @@ const GamePlayScreen = () => {
               className={seat.className}
               displayName={display_name}
               avatarUrl={avatar_url}
-              coins={p.coins}
+              coins={coins}
             />
           )
         })}
