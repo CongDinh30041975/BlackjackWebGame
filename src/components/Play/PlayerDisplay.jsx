@@ -13,12 +13,12 @@ const PlayerDisplay = ({ displayName, avatarUrl, coins, className, isHost = fals
           <GiCrownedHeart />
         </i>
       )}
-      <span className='coins'>
+      <span className='coins' title={coins}>
         <img src={Coin_icon} alt='coin' className='coin_icon' />
         {coins || 0}
       </span>
       <img className='avatar_img' src={avatarUrl ?? Avatar_placeholder} alt='Ảnh đại diện'/>
-      <span className='displayName'>{displayName || 'Vô danh'}</span>
+      <span className='displayName' title={displayName}>{displayName || 'Vô danh'}</span>
     </div>
   )
 }
